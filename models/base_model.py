@@ -1,14 +1,27 @@
 #!/usr/bin/python3
-""" """
+"""This is base model class"""
 from uuid import uuid4
 from datetime import datetime
 
 
 class BaseModel:
-    def __init__(self):
-        self.id = str(uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
+    """BaseModel"""
+    def __init__(self, *args, **kwargs):
+        """init of new BaseModel
+        kwargs argument used for for the constructor of a BaseModel
+
+        """
+        if len(kwargs) == 0:
+            self.id = str(uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
+        else:
+            if "__class__" in kwargs:
+                del kwargs["__class__"]
+            for key, value in kwargs.items():
+                if key == "updated_at" or key == "created_at":
+                    value = datetime.fromisoformat(value)
+                setattr(self, key, value)
 
     def save(self):
         self.updated_at = datetime.now()
