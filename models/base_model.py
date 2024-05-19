@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
-This is base model class
+Base module.
+This module has BaseModel class demenstration.
 """
 from uuid import uuid4
 from datetime import datetime
@@ -11,6 +12,7 @@ class BaseModel:
     BaseModel attributes :
     *args will not be used
     **kwargs will be used
+
     """
     def __init__(self, *args, **kwargs):
         """init of new BaseModel
@@ -46,3 +48,4 @@ class BaseModel:
         return "[{}] ({}) {}".format(self.__class__.__name__,
         self.id,
         self.__dict__)
+
