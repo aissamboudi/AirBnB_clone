@@ -36,7 +36,10 @@ class BaseModel:
         self.updated_at = datetime.now()
 
     def to_dict(self):
-        """return a dictionary with each key,value included in  __dict__ instance """
+        """
+        return a dictionary with each key,
+        value included in  __dict__ instance
+        """
         idict = self.__dict__.copy()
         idict["__class__"] = self.__class__.__name__
         idict["created_at"] = self.created_at.isoformat()
@@ -45,7 +48,5 @@ class BaseModel:
 
     def __str__(self):
         """return a string represent the object"""
-        return "[{}] ({}) {}".format(self.__class__.__name__,
-        self.id,
-        self.__dict__)
-
+        aux = self.__class__.__name__
+        return "[{}] ({}) {}".format(aux, self.id, self.__dict__)
