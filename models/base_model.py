@@ -5,6 +5,7 @@ This module has BaseModel class demenstration.
 """
 from uuid import uuid4
 from datetime import datetime
+import models
 
 
 class BaseModel:
@@ -30,10 +31,12 @@ class BaseModel:
                 if key == "updated_at" or key == "created_at":
                     value = datetime.fromisoformat(value)
                 setattr(self, key, value)
+        models.storage.new(self)
 
     def save(self):
         """update updated_at with current datetime"""
         self.updated_at = datetime.now()
+        models.storage.save()
 
     def to_dict(self):
         """
